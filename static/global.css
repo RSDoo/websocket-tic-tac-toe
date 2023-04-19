@@ -1,0 +1,14 @@
+
+.normal {
+		background-color: black;
+		color: green;
+		font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#log{
+	margin: 0 auto;
+	max-width: 40em;
+	padding: 8px;
+	border-radius: 5px;
+	background-color: black;
+}
