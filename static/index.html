@@ -7,39 +7,13 @@
 </head>
 
 <body>
+	<h1>Welcome to Tic Tac To</h1>
+	<p>
+		Start a game
+	</p>
+	<div><span id="clientIdle">X</span>Player waiting to play</div>
+	<script src="board.js" defer></script>
 
-
-	<h1>We will do some things with Websockets here (: </h1>
-	<h2 id="clientCount"></h2>
-	<div id="log"></div>
-	<script defer>
-		var ws = new WebSocket("ws://localhost:8080");
-		console.log("ws: ", ws);
-
-		var log_div = document.querySelector("#log"); //.getElementById("log");
-		console.log("div: ", log_div);
-
-		function log(message, status = "normal") {
-			log_div.innerHTML += `<p class="${status}">${message}</p>`;
-			log_div.scrollTop += 1000;
-		}
-
-		function updateClientCount(count) {
-			document.querySelector("#clientCount").innerHTML = `${count}`;
-		}
-
-		ws.onopen = function () {
-			console.log("Connection established");
-			log("Connection established");
-		};
-
-		ws.onmessage = function (event) {
-			var data = JSON.parse(event.data);
-			console.log("Message received: ", event.data);
-			updateClientCount(data.clientCount);
-		};
-
-	</script>
 </body>
 
 </html>

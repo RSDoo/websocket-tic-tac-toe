@@ -1,8 +1,8 @@
 
 .normal {
-		background-color: black;
-		color: green;
-		font-family: "Lucida Console", "Courier New", monospace;
+	background-color: black;
+	color: green;
+	font-family: "Lucida Console", "Courier New", monospace;
 }
 
 #log{
@@ -12,3 +12,35 @@
 	border-radius: 5px;
 	background-color: black;
 }
+
+#clientCount {
+	display: inline-block;
+}
+
+.board {
+	display: grid;
+	grid-template-columns: 200px 200px 200px;
+}
+
+.cell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: black;
+	color: white;
+	font-size: 11em;
+
+	height: 200px;
+	width: 200px;
+}
+
+.cell:hover {
+	background-color: grey;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+

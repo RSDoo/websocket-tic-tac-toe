@@ -1,21 +1,30 @@
 import WebSocket, { WebSocketServer } from "ws";
 import express from "express";
+import { startGameServer } from "./game";
 
+interface IWebSocket extends WebSocket {
+	id: string;
+}
+console.log("hellO");
 const app = express();
 app.use(express.static("static"));
 
-const PORT = 4000 || process.env.PORT;
+const PORT_EXPRESS = 4040 || process.env.PORT;
 const STATIC_PATH = "/static";
 
 let clientCount = 0;
 
 console.log("hello world from the service :) ");
 
+const PORT_WEBSOCKET = 8080;
 const wsServer = new WebSocketServer({
-	port: 8080
+	port: PORT_WEBSOCKET
 });
 
-wsServer.on("connection", (ws: WebSocket) => {
+wsServer.on("connection", (ws: IWebSocket, req: any) => {
+	const clientID = req.url.split("?")[1].split("=")[1];
+	ws.id = clientID;
+
 	clientCount++;
 	console.log("client connected count: ", clientCount);
 	wsServer.clients.forEach((client) => {
@@ -37,15 +46,16 @@ wsServer.on("connection", (ws: WebSocket) => {
 
 	ws.on("message", (message: string) => {
 		console.log("message received: %s", message);
-
-
 	});
-
-
 });
 
-app.listen(PORT, () => {
-	console.log("server started on port oooooon ", PORT);
-	console.log(`http://localhost:${PORT}`);
+app.listen(PORT_EXPRESS, () => {
+	console.log("server started on port on ", PORT_EXPRESS);
+	console.log(`http://localhost:${PORT_EXPRESS}`);
+	startGameServer();
 });
 
+app.get("/game/:id", (req, res) => {
+	res.sendFile(STATIC_PATH + "/game.html", { root: "./" });
+
+})
