@@ -25,7 +25,7 @@ Open the game in the browser with
 `http://localhost:4040/game/<your-game-id>?clientId=<your-client-id>`
 
 ## ToDo's
-[] Implement the lobby. Find oponent / create match
-[] Move the clientId from query params to header
-[] Cool animations for winning / loosing / draw
-[] Rematch with same oponent
+- [ ] Implement the lobby. Find oponent / create match
+- [ ] Move the clientId from query params to header
+- [ ] Cool animations for winning / loosing / draw
+- [ ] Rematch with same oponent
