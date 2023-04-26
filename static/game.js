@@ -3,21 +3,15 @@
 
 const websocketRoot = "ws://localhost:4041";
 const clientId = window.location.href.split("?")[1].split("=")[1];
-console.log("clientId: ", clientId);
 const gameId = window.location.href.split("/")[4].split("?")[0];
 console.log("gameId: ", gameId);
 var ws = new WebSocket(`${websocketRoot}/ws?clientId=${clientId}&gameId=${gameId}`);
-console.log("ws: ", ws);
-
 
 ws.onmessage = function(event) {
 	var data = JSON.parse(event.data);
-	console.log("Message received: ", event.data);
 	if (data?.board) {
 		const cells = document.querySelectorAll(".cell");
 		setInfo(data);
-		console.log("INFO ", info);
-
 
 		for (let i = 0; i < cells.length; i++) {
 			const innerCell = document.createElement("div");

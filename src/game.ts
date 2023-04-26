@@ -14,17 +14,11 @@ export function startGameServer() {
 	});
 	const openGames: Game[] = [];
 
-	setInterval(() => {
-		console.log("openGames", openGames);
-	}, 5000);
-
 
 	wsGameServer.on("connection", (ws: IWebSocket, req: any) => {
 		const clientID = req.url.split("?")[1].split("=")[1].split("&")[0];
 		const gameID = req.url.split("?")[1].split("=")[2];
-		console.log("gameID:", gameID);
 
-		console.log("req", clientID);
 		const game = findGame(gameID);
 
 		if (!game) {
@@ -47,7 +41,6 @@ export function startGameServer() {
 		ws.on("error", console.error);
 
 		ws.on("message", (message: string) => {
-			console.log("gameserver-message received: %s", message);
 			const data = JSON.parse(message);
 			const game = findGame(data.gameId);
 			const client = game?.players.find(client => client.id == data.clientId);
@@ -61,7 +54,6 @@ export function startGameServer() {
 }
 
 function broadCastClients(clients: Set<WebSocket.WebSocket>, message: string) {
-	console.log(message);
 	clients.forEach((client) => {
 		if (client.readyState === WebSocket.OPEN) {
 			client.send(message);

@@ -5,7 +5,6 @@ import { startGameServer } from "./game";
 interface IWebSocket extends WebSocket {
 	id: string;
 }
-console.log("hellO");
 const app = express();
 app.use(express.static("static"));
 
@@ -14,7 +13,6 @@ const STATIC_PATH = "/static";
 
 let clientCount = 0;
 
-console.log("hello world from the service :) ");
 
 const PORT_WEBSOCKET = 8080;
 const wsServer = new WebSocketServer({
@@ -26,7 +24,6 @@ wsServer.on("connection", (ws: IWebSocket, req: any) => {
 	ws.id = clientID;
 
 	clientCount++;
-	console.log("client connected count: ", clientCount);
 	wsServer.clients.forEach((client) => {
 		if (client.readyState === WebSocket.OPEN) {
 			client.send(JSON.stringify({ clientCount }));
@@ -50,7 +47,6 @@ wsServer.on("connection", (ws: IWebSocket, req: any) => {
 });
 
 app.listen(PORT_EXPRESS, () => {
-	console.log("server started on port on ", PORT_EXPRESS);
 	console.log(`http://localhost:${PORT_EXPRESS}`);
 	startGameServer();
 });
